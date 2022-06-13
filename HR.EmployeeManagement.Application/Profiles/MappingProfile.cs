@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using HR.EmployeeManagement.Application.Features.Employees;
 using HR.EmployeeManagement.Application.Features.Teams;
+using HR.EmployeeManagement.Application.Features.Users;
 using HR.EmployeeManagement.Domain.Entities;
 
 namespace HR.EmployeeManagement.Application.Profiles
@@ -22,6 +23,10 @@ namespace HR.EmployeeManagement.Application.Profiles
             CreateMap<Team, TeamDetailsVM>().ReverseMap();
             CreateMap<Team, CreateNewTeamCommand>().ReverseMap();
             CreateMap<Team, UpdateTeamCommand>().ReverseMap();
+
+            CreateMap<User, UsersVM>().ReverseMap();
+            CreateMap<User, RegisterUserCommand>().ReverseMap();
+            CreateMap<User, UpdateUserCommand>().ReverseMap();
         }
     }
 }

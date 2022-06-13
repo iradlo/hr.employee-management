@@ -12,10 +12,37 @@ namespace HR.EmployeeManagement.Persistance
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Team> Teams { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(EmployeeManagementDbContext).Assembly);
+
+            //users
+
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = 1,
+                UserName = "admin",
+                Password = "admin",
+                Role = "administrator"
+            });
+
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = 2,
+                UserName = "igor",
+                Password = "igor",
+                Role = "user"
+            });
+
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = 3,
+                UserName = "test",
+                Password = "test",
+                Role = "user"
+            });
 
             //teams
             modelBuilder.Entity<Team>().HasData(new Team

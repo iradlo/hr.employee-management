@@ -2,7 +2,7 @@
 
 namespace HR.EmployeeManagement.Persistance.Migrations
 {
-    public partial class initialMigration : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -18,6 +18,21 @@ namespace HR.EmployeeManagement.Persistance.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Teams", x => x.TeamId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Users",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserName = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true),
+                    Role = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Users", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -48,17 +63,22 @@ namespace HR.EmployeeManagement.Persistance.Migrations
             migrationBuilder.InsertData(
                 table: "Teams",
                 columns: new[] { "TeamId", "Description", "TeamName" },
-                values: new object[] { 2, "Team for designing UI", "User interface team" });
+                values: new object[,]
+                {
+                    { 2, "Team for designing UI", "User interface team" },
+                    { 1, "Team for database", "Database team" },
+                    { 3, "Team for architecture and infrastructure", "Infrastructure team" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Teams",
-                columns: new[] { "TeamId", "Description", "TeamName" },
-                values: new object[] { 1, "Team for database", "Database team" });
-
-            migrationBuilder.InsertData(
-                table: "Teams",
-                columns: new[] { "TeamId", "Description", "TeamName" },
-                values: new object[] { 3, "Team for architecture and infrastructure", "Infrastructure team" });
+                table: "Users",
+                columns: new[] { "Id", "Password", "Role", "UserName" },
+                values: new object[,]
+                {
+                    { 1, "admin", "administrator", "admin" },
+                    { 2, "igor", "user", "igor" },
+                    { 3, "test", "user", "test" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Employees",
@@ -83,6 +103,9 @@ namespace HR.EmployeeManagement.Persistance.Migrations
         {
             migrationBuilder.DropTable(
                 name: "Employees");
+
+            migrationBuilder.DropTable(
+                name: "Users");
 
             migrationBuilder.DropTable(
                 name: "Teams");

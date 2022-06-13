@@ -22,6 +22,7 @@ namespace HR.EmployeeManagement.Persistance
 
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             services.AddScoped<ITeamRepository, TeamRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             return services;
         }

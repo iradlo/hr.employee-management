@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HR.EmployeeManagement.Persistance.Migrations
 {
     [DbContext(typeof(EmployeeManagementDbContext))]
-    [Migration("20220419094053_initialMigration")]
-    partial class initialMigration
+    [Migration("20220606133310_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -160,6 +160,50 @@ namespace HR.EmployeeManagement.Persistance.Migrations
                             TeamId = 3,
                             Description = "Team for architecture and infrastructure",
                             TeamName = "Infrastructure team"
+                        });
+                });
+
+            modelBuilder.Entity("HR.EmployeeManagement.Domain.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Password = "admin",
+                            Role = "administrator",
+                            UserName = "admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Password = "igor",
+                            Role = "user",
+                            UserName = "igor"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Password = "test",
+                            Role = "user",
+                            UserName = "test"
                         });
                 });
 
